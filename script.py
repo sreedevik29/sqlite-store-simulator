@@ -25,12 +25,17 @@ def create_table_purchases():
 	query = "CREATE TABLE IF NOT EXISTS purchases_info (purchases_id INTEGER PRIMARY KEY, date_time DATETIME, FOREIGN KEY (item_id) REFERENCES create_table_catalogue(item_id)"
 	cursor.execute(query)
 
+def save_and_close_db():
+	connection.commit()
+	connection.close()
+
 def main():
-create_table_customers()
-display_customer_table()
-name = input("What is your name?\n")
-email = input("What is your email?\n")
-insert_customer_details(name, email)
+	create_table_customers()
+	# display_customer_table()
+	name = input("What is your name?\n")
+	email = input("What is your email?\n")
+	insert_customer_details(name, email)
+	save_and_close_db()
 
 # create_table_catalogue()
 # create_table_purchases()
