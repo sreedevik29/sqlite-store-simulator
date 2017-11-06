@@ -26,7 +26,7 @@ def update_customer_email(customer_email, customer_id):
 	cursor.execute(query, (customer_email, customer_id))
 
 def delete_customer(shopper_id):
-	query = "DELETE FROM customer_info WHERE id = ?"
+	query = "DELETE FROM customer_info WHERE shopper_id = ?"
 	cursor.execute(query, (shopper_id,))
 
 def create_table_catalogue():
@@ -43,8 +43,8 @@ def insert_catalogue_details(value1, value2):
 	query = "INSERT INTO catalogue_info (item_name, type_of_clothing) VALUES (?, ?)"
 	cursor.execute(query, (value1, value2))
 
-def update_catalogue_details(item_id)
-	query = "UPDATE catalogue_info SET sold_status = 0 WHERE id = ?"
+def update_catalogue_details(item_id):
+	query = "UPDATE catalogue_info SET sold_status = 0 WHERE item_id = ?"
 	cursor.execute(query, (item_id,))
 
 def create_table_purchases():
@@ -58,18 +58,24 @@ def save_and_close_db():
 def main():
 	create_table_customers()
 	display_customer_table()
-	# name = input("What is your name?\n")
-	# email = input("What is your email?\n")
-	# insert_customer_details(name, email)
+	name = input("What is name of the customer you want to add?\n")
+	email = input("What is the email of that customer?\n")
+	insert_customer_details(name, email)
 	# shopper_id = input("Which id do you want to change?\n")
 	# # new_name = input("What is the new name you want to enter?\n")
 	# # update_customer_name(new_name, int(shoppers_id))
 	# new_email = input("What is the new email of this person?\n")
 	# update_customer_email(new_email, int(shopper_id))
+	# delete_shopper = input("What is the ID of the customer you want to delete?\n")
+	# delete_customer(delete_shopper)
 
-	create_table_catalogue()
-	display_table_catalogue()
-	insert_catalogue_details()
+	# create_table_catalogue()
+	# display_table_catalogue()
+	# item_name = input("What is the name of the item in your store?\n")
+	# clothing_type = input("What type of clothing is it?\n")
+	# insert_catalogue_details(item_name, clothing_type)
+	# sold_item_id = input("What is the ID of the item that is no longer in store?\n")
+	# update_catalogue_details(sold_item_id)
 
 	save_and_close_db()
 
