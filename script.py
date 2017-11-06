@@ -10,6 +10,7 @@ def create_table_customers():
 def display_customer_table():
 	query = "SELECT * FROM customer_info"
 	table = cursor.execute(query)
+	print("THIS IS THE CUSTOMER LIST:\n")
 	for row in table:
 		print("[" + str(row[0]) + "]" + "[" + " -- [" + row[1] + "]" + " -- [" + row[2] + "]")
 
@@ -36,6 +37,7 @@ def create_table_catalogue():
 def display_table_catalogue():
 	query = "SELECT * FROM catalogue_info"
 	table = cursor.execute(query)
+	print("THIS IS THE CATALOGUE LIST:\n")
 	for row in table:
 		print("[" + str(row[0]) + "]" + "[" + " -- [" + row[1] + "]" + " -- [" + row[2] + "]" + " -- [" + str(row[3]) + "]")
 
@@ -58,8 +60,8 @@ def save_and_close_db():
 def main():
 	create_table_customers()
 	display_customer_table()
-	name = input("What is name of the customer you want to add?\n")
-	email = input("What is the email of that customer?\n")
+	name = input("\nWhat is name of the customer you want to add?\n")
+	email = input("\nWhat is the email of that customer?\n")
 	insert_customer_details(name, email)
 	# shopper_id = input("Which id do you want to change?\n")
 	# # new_name = input("What is the new name you want to enter?\n")
@@ -69,11 +71,11 @@ def main():
 	# delete_shopper = input("What is the ID of the customer you want to delete?\n")
 	# delete_customer(delete_shopper)
 
-	# create_table_catalogue()
-	# display_table_catalogue()
-	# item_name = input("What is the name of the item in your store?\n")
-	# clothing_type = input("What type of clothing is it?\n")
-	# insert_catalogue_details(item_name, clothing_type)
+	create_table_catalogue()
+	display_table_catalogue()
+	item_name = input("\nWhat is the name of the item in your store?\n")
+	clothing_type = input("\nWhat category is it?\n")
+	insert_catalogue_details(item_name, clothing_type)
 	# sold_item_id = input("What is the ID of the item that is no longer in store?\n")
 	# update_catalogue_details(sold_item_id)
 
