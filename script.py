@@ -28,12 +28,29 @@ def generate_database():
 	create_catalogue_table()
 	create_purchase_table()
 
+def prompt_user_input():
+	user_info = {"name": "", "email": ""}
+	user_info["name"] = input("What is your name?\n")
+	user_info["email"] = input("What is your email?\n")
+	return user_info
+
+def create_new_user(user_info):
+	name = user_info["name"]
+	email = user_info["email"]
+	query = "INSERT INTO customer (name, email) VALUES (?, ?)"
+	cursor.execute(query, (name, email))
+
+def register_user():
+	user_info = prompt_user_input()
+	create_new_user(user_info)
+
 def save_and_close_db():
 	connection.commit()
 	connection.close()
 
 def main():
 	generate_database()
+	register_user()
 	save_and_close_db()
 
 if __name__ == '__main__':
