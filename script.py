@@ -8,16 +8,18 @@ def create_customer_table():
 	cursor.execute(query) 
 
 def create_catalogue_table():
-	query = "CREATE TABLE IF NOT EXISTS catalogue (id INTEGER PRIMARY KEY, name TEXT, category TEXT, available BOOLEAN DEFAULT 1)"
+	query = "CREATE TABLE IF NOT EXISTS catalogue (id INTEGER PRIMARY KEY, name TEXT, category TEXT, price INTEGER, available BOOLEAN DEFAULT 1)"
 	cursor.execute(query)
 
 def create_purchase_table():
 	query = """ CREATE TABLE IF NOT EXISTS purchase(
 				id INTEGER PRIMARY KEY, 
 				date_time DATETIME, 
-				item_id INTEGER, 
 				shopper_id INTEGER, 
-				FOREIGN KEY (item_id) REFERENCES catalogue(id), 
+				item_id INTEGER, 
+				price INTEGER,
+				FOREIGN KEY (item_id) REFERENCES catalogue(id),
+				FOREIGN KEY (price) REFERENCES catalogue(price),
 				FOREIGN KEY (shopper_id) REFERENCES customer(id))"""
 	cursor.execute(query)
 
