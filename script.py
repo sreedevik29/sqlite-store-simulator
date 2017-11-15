@@ -44,6 +44,24 @@ def register_user():
 	user_info = prompt_user_input()
 	create_new_user(user_info)
 
+def prompt_item_input():
+	item_info = {"name": "jeans", "category": "clothing", "price": ""}
+	item_info["name"] = input("What is the name of the item?\n")
+	item_info["category"] = input("Which category is the item from?\n")
+	item_info["price"] = int(input("What is price of that item?\n"))
+	return item_info
+
+def add_new_items(item_info):
+	name = item_info["name"]
+	category = item_info["category"]
+	price = item_info["price"]
+	query = "INSERT INTO catalogue (name, category, price) VALUES (?, ?, ?)"
+	cursor.execute(query, (name, category, price))
+
+def new_inventory():
+	item_info = prompt_item_input()
+	add_new_items(item_info)
+
 def save_and_close_db():
 	connection.commit()
 	connection.close()
@@ -51,6 +69,7 @@ def save_and_close_db():
 def main():
 	generate_database()
 	register_user()
+	new_inventory()
 	save_and_close_db()
 
 if __name__ == '__main__':
