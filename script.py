@@ -62,6 +62,18 @@ def new_inventory():
 	item_info = prompt_item_input()
 	add_new_items(item_info)
 
+def select_item_ID():
+	item_id = input("What is the ID# of the item?\n")
+	return item_id
+
+def update_item_availability(item_id):
+	query = "UPDATE catalogue SET available = 0 WHERE id = ?"
+	cursor.execute(query, (item_id))
+
+def new_availability_status():
+	item_id = select_item_ID()
+	update_item_availability(item_id)
+
 def save_and_close_db():
 	connection.commit()
 	connection.close()
@@ -70,6 +82,7 @@ def main():
 	generate_database()
 	register_user()
 	new_inventory()
+	new_availability_status()
 	save_and_close_db()
 
 if __name__ == '__main__':
