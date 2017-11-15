@@ -74,13 +74,13 @@ def new_availability_status():
 	item_id = select_item_ID()
 	update_item_availability(item_id)
 
-def prompt_new_customer_name():
-	user_name = input("What is the new name of this customer?\n")
-	return user_name
-
 def select_user_ID():
 	user_id = input("What is the ID of the customer you want to select?\n")
 	return user_id
+
+def prompt_new_customer_name():
+	user_name = input("What is the new name of this customer?\n")
+	return user_name
 
 def new_customer_name(user_name, user_id):
 	query = "UPDATE customer SET name = ? WHERE id = ?"
@@ -90,17 +90,31 @@ def update_customer_name():
 	user_id = select_user_ID()
 	user_name = prompt_new_customer_name()
 	new_customer_name(user_name, user_id)
-	
+
+def prompt_new_customer_email():
+	user_email = input("What is the new email of this customer?\n")
+	return user_email
+
+def new_customer_email(user_email, user_id):
+	query = "UPDATE customer SET email = ? WHERE id = ?"
+	cursor.execute(query, (user_email, user_id))
+
+def update_customer_email():
+	user_id = select_user_ID()
+	user_email = prompt_new_customer_email()
+	new_customer_email(user_email, user_id)
+
 def save_and_close_db():
 	connection.commit()
 	connection.close()
 
 def main():
 	generate_database()
-	# register_user()
-	# new_inventory()
-	# new_availability_status()
+	register_user()
+	new_inventory()
+	new_availability_status()
 	update_customer_name()
+	update_customer_email()
 	save_and_close_db()
 
 if __name__ == '__main__':
