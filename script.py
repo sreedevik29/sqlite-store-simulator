@@ -104,6 +104,14 @@ def update_customer_email():
 	user_email = prompt_new_customer_email()
 	new_customer_email(user_email, user_id)
 
+def remove_customer_profile(user_id):
+	query = "DELETE FROM customer WHERE id = ?"
+	cursor.execute(query, (user_id,))
+
+def delete_customer():
+	user_id = select_user_ID()
+	remove_customer_profile(user_id)
+
 def save_and_close_db():
 	connection.commit()
 	connection.close()
@@ -114,7 +122,7 @@ def main():
 	active = True
 
 	while active:
-		user_input = input("Select option: [ 1 - Register user, 2 - Add new inventory item, 3 - Update availability status of item, 4 - Update customer name, 5 - Update customer email, 6 - EXIT ]\n")
+		user_input = input("Select option: [ 1 - Register user, 2 - Add new inventory item, 3 - Update availability status of item, 4 - Update customer name, 5 - Update customer email, 6 - Delete customer profile, 7 - EXIT ]\n")
 		if user_input == "1":
 			register_user()
 		elif user_input == "2":
@@ -125,6 +133,8 @@ def main():
 			update_customer_name()
 		elif user_input == "5":
 			update_customer_email()
+		elif user_input == "6":
+			delete_customer()
 		else:
 			active = False
 	
