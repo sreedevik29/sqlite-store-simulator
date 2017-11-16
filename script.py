@@ -23,10 +23,14 @@ def create_purchase_table():
 				FOREIGN KEY (shopper_id) REFERENCES customer(id))"""
 	cursor.execute(query)
 
+# CREATE TABLES
+
 def generate_database():
 	create_customer_table()
 	create_catalogue_table()
 	create_purchase_table()
+
+# USER REGISTRATION
 
 def prompt_user_input():
 	user_info = {"name": "", "email": ""}
@@ -43,6 +47,8 @@ def create_new_user(user_info):
 def register_user():
 	user_info = prompt_user_input()
 	create_new_user(user_info)
+
+# NEW INVENTORY SETUP
 
 def prompt_item_input():
 	item_info = {"name": "jeans", "category": "clothing", "price": ""}
@@ -62,6 +68,8 @@ def new_inventory():
 	item_info = prompt_item_input()
 	add_new_items(item_info)
 
+# UPDATE AVAILABILITY OF ITEM
+
 def select_item_ID():
 	item_id = input("What is the ID# of the item?\n")
 	return item_id
@@ -73,6 +81,8 @@ def update_item_availability(item_id):
 def new_availability_status():
 	item_id = select_item_ID()
 	update_item_availability(item_id)
+
+# CUSTOMER PROFILE UPDATES
 
 def select_user_ID():
 	user_id = input("What is the ID of the customer you want to select?\n")
@@ -103,6 +113,8 @@ def update_customer_email():
 	user_id = select_user_ID()
 	user_email = prompt_new_customer_email()
 	new_customer_email(user_email, user_id)
+
+# DELETE CUSTOMER PROFILES
 
 def remove_customer_profile(user_id):
 	query = "DELETE FROM customer WHERE id = ?"
