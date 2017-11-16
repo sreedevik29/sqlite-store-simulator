@@ -110,11 +110,24 @@ def save_and_close_db():
 
 def main():
 	generate_database()
-	register_user()
-	new_inventory()
-	new_availability_status()
-	update_customer_name()
-	update_customer_email()
+
+	active = True
+
+	while active:
+		user_input = input("Select option: [ 1 - Register user, 2 - Add new inventory item, 3 - Update availability status of item, 4 - Update customer name, 5 - Update customer email, 6 - EXIT ]\n")
+		if user_input == "1":
+			register_user()
+		elif user_input == "2":
+			new_inventory()
+		elif user_input == "3":
+			new_availability_status()
+		elif user_input == "4":
+			update_customer_name()
+		elif user_input == "5":
+			update_customer_email()
+		else:
+			active = False
+	
 	save_and_close_db()
 
 if __name__ == '__main__':
